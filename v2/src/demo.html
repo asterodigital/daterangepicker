@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DateRangePicker v4 Demo - Vanilla JS with Day.js</title>
+
+
+    <!-- DateRangePicker CSS -->
+    <link rel="stylesheet" href="../dist/daterangepicker.css">
+
+    <!-- Astero UI CSS -->
+    <link href="https://asteroui-temp.pages.dev/styles/asteroui.min.css" rel="stylesheet" />
+
+    <style>
+        body {
+            padding: 40px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        .demo-section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .demo-section h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .demo-input {
+            margin-bottom: 15px;
+        }
+
+        .info-box {
+            background: white;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 15px;
+            border-left: 4px solid #007bff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mb-4">DateRangePicker v4.0 Demo</h1>
+        <p class="lead">Vanilla JavaScript with Day.js - No jQuery Required!</p>
+
+        <!-- Basic Example -->
+        <div class="demo-section">
+            <h2>Basic Date Range Picker</h2>
+            <div class="demo-input">
+                <label for="basic-example" class="form-label">Select Date Range:</label>
+                <input type="text" id="basic-example" class="form-control" style="max-width: 300px;">
+            </div>
+            <div class="info-box">
+                <strong>Selected:</strong> <span id="basic-output">Not selected yet</span>
+            </div>
+        </div>
+
+        <!-- Single Date Picker -->
+        <div class="demo-section">
+            <h2>Single Date Picker</h2>
+            <div class="demo-input">
+                <label for="single-example" class="form-label">Select Single Date:</label>
+                <input type="text" id="single-example" class="form-control" style="max-width: 300px;">
+            </div>
+            <div class="info-box">
+                <strong>Selected:</strong> <span id="single-output">Not selected yet</span>
+            </div>
+        </div>
+
+        <!-- With Time Picker -->
+        <div class="demo-section">
+            <h2>Date Range with Time Picker</h2>
+            <div class="demo-input">
+                <label for="time-example" class="form-label">Select Date & Time Range:</label>
+                <input type="text" id="time-example" class="form-control" style="max-width: 400px;">
+            </div>
+            <div class="info-box">
+                <strong>Selected:</strong> <span id="time-output">Not selected yet</span>
+            </div>
+        </div>
+
+        <!-- With Predefined Ranges -->
+        <div class="demo-section">
+            <h2>With Predefined Ranges</h2>
+            <div class="demo-input">
+                <label for="ranges-example" class="form-label">Select from Ranges:</label>
+                <input type="text" id="ranges-example" class="form-control" style="max-width: 300px;">
+            </div>
+            <div class="info-box">
+                <strong>Selected:</strong> <span id="ranges-output">Not selected yet</span>
+            </div>
+        </div>
+
+        <!-- Auto Apply -->
+        <div class="demo-section">
+            <h2>Auto Apply (No Buttons)</h2>
+            <div class="demo-input">
+                <label for="auto-example" class="form-label">Auto Apply Selection:</label>
+                <input type="text" id="auto-example" class="form-control" style="max-width: 300px;">
+            </div>
+            <div class="info-box">
+                <strong>Selected:</strong> <span id="auto-output">Not selected yet</span>
+            </div>
+        </div>
+
+        <!-- Programmatic Control -->
+        <div class="demo-section">
+            <h2>Programmatic Control</h2>
+            <div class="demo-input">
+                <label for="programmatic-example" class="form-label">Controlled Picker:</label>
+                <input type="text" id="programmatic-example" class="form-control" style="max-width: 300px;">
+            </div>
+            <div class="mb-3">
+                <button id="set-today" class="btn btn-primary btn-sm">Set Today</button>
+                <button id="set-last-week" class="btn btn-primary btn-sm">Set Last Week</button>
+                <button id="set-this-month" class="btn btn-primary btn-sm">Set This Month</button>
+            </div>
+            <div class="info-box">
+                <strong>Selected:</strong> <span id="programmatic-output">Not selected yet</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Day.js -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.10/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.10/plugin/localeData.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.10/plugin/isBetween.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.10/plugin/customParseFormat.js"></script>
+
+    <!-- DateRangePicker -->
+    <script src="../dist/daterangepicker.umd.js"></script>
+
+    <script>
+        // Extend dayjs with plugins
+        dayjs.extend(window.dayjs_plugin_localeData);
+        dayjs.extend(window.dayjs_plugin_isBetween);
+        dayjs.extend(window.dayjs_plugin_customParseFormat);
+
+        // Basic Example
+        const basicPicker = new DateRangePicker(document.getElementById('basic-example'), {
+            autoUpdateInput: true
+        });
+
+        document.getElementById('basic-example').addEventListener('apply.daterangepicker', function (e) {
+            document.getElementById('basic-output').textContent =
+                e.detail.startDate.format('MMMM D, YYYY') + ' - ' + e.detail.endDate.format('MMMM D, YYYY');
+        });
+
+        // Single Date Picker
+        const singlePicker = new DateRangePicker(document.getElementById('single-example'), {
+            singleDatePicker: true,
+            autoUpdateInput: true
+        });
+
+        document.getElementById('single-example').addEventListener('apply.daterangepicker', function (e) {
+            document.getElementById('single-output').textContent = e.detail.startDate.format('MMMM D, YYYY');
+        });
+
+        // Time Picker
+        const timePicker = new DateRangePicker(document.getElementById('time-example'), {
+            timePicker: true,
+            timePicker24Hour: false,
+            timePickerIncrement: 15,
+            locale: {
+                format: 'MM/DD/YYYY hh:mm A'
+            },
+            autoUpdateInput: true
+        });
+
+        document.getElementById('time-example').addEventListener('apply.daterangepicker', function (e) {
+            document.getElementById('time-output').textContent =
+                e.detail.startDate.format('MMMM D, YYYY hh:mm A') + ' - ' +
+                e.detail.endDate.format('MMMM D, YYYY hh:mm A');
+        });
+
+        // With Ranges
+        const rangesPicker = new DateRangePicker(document.getElementById('ranges-example'), {
+            ranges: {
+                'Today': [dayjs(), dayjs()],
+                'Yesterday': [dayjs().subtract(1, 'days'), dayjs().subtract(1, 'days')],
+                'Last 7 Days': [dayjs().subtract(6, 'days'), dayjs()],
+                'Last 30 Days': [dayjs().subtract(29, 'days'), dayjs()],
+                'This Month': [dayjs().startOf('month'), dayjs().endOf('month')],
+                'Last Month': [dayjs().subtract(1, 'month').startOf('month'), dayjs().subtract(1, 'month').endOf('month')]
+            },
+            autoUpdateInput: true
+        });
+
+        document.getElementById('ranges-example').addEventListener('apply.daterangepicker', function (e) {
+            document.getElementById('ranges-output').textContent =
+                e.detail.startDate.format('MMMM D, YYYY') + ' - ' + e.detail.endDate.format('MMMM D, YYYY');
+        });
+
+        // Auto Apply
+        const autoPicker = new DateRangePicker(document.getElementById('auto-example'), {
+            autoApply: true,
+            autoUpdateInput: true
+        });
+
+        document.getElementById('auto-example').addEventListener('apply.daterangepicker', function (e) {
+            document.getElementById('auto-output').textContent =
+                e.detail.startDate.format('MMMM D, YYYY') + ' - ' + e.detail.endDate.format('MMMM D, YYYY');
+        });
+
+        // Programmatic Control
+        const programmaticPicker = new DateRangePicker(document.getElementById('programmatic-example'), {
+            autoUpdateInput: true
+        });
+
+        document.getElementById('programmatic-example').addEventListener('apply.daterangepicker', function (e) {
+            document.getElementById('programmatic-output').textContent =
+                e.detail.startDate.format('MMMM D, YYYY') + ' - ' + e.detail.endDate.format('MMMM D, YYYY');
+        });
+
+        document.getElementById('set-today').addEventListener('click', function () {
+            programmaticPicker.setStartDate(dayjs());
+            programmaticPicker.setEndDate(dayjs());
+        });
+
+        document.getElementById('set-last-week').addEventListener('click', function () {
+            programmaticPicker.setStartDate(dayjs().subtract(7, 'days'));
+            programmaticPicker.setEndDate(dayjs().subtract(1, 'days'));
+        });
+
+        document.getElementById('set-this-month').addEventListener('click', function () {
+            programmaticPicker.setStartDate(dayjs().startOf('month'));
+            programmaticPicker.setEndDate(dayjs().endOf('month'));
+        });
+    </script>
+</body>
+
+</html>

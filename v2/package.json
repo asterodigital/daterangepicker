@@ -1,0 +1,46 @@
+{
+  "name": "daterangepicker",
+  "version": "4.0.0",
+  "description": "Date range picker component - Vanilla JS with Day.js",
+  "type": "module",
+  "main": "dist/daterangepicker.cjs.js",
+  "module": "dist/daterangepicker.esm.js",
+  "browser": "dist/daterangepicker.umd.js",
+  "style": "dist/daterangepicker.css",
+  "types": "dist/daterangepicker.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dangrossman/daterangepicker.git"
+  },
+  "author": {
+    "name": "Dan Grossman",
+    "email": "dan@dangrossman.info",
+    "url": "http://www.dangrossman.info"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dangrossman/daterangepicker/issues"
+  },
+  "homepage": "https://github.com/dangrossman/daterangepicker",
+  "peerDependencies": {
+    "dayjs": "^1.11.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "dayjs": "^1.11.10",
+    "rollup": "^4.9.6",
+    "rollup-plugin-copy": "^3.5.0",
+    "rollup-plugin-postcss": "^4.0.2"
+  }
+}
