@@ -254,8 +254,13 @@ export const eventMethods = {
 
   clickApply(e) {
     if (e) e.preventDefault();
-    
+    // Ensure the input element is updated with the selected dates
+    if (typeof this.updateElement === 'function') {
+      this.updateElement();
+    }
+
     this.hide();
+
     dom.trigger(this.element, 'apply.daterangepicker', {
       startDate: this.startDate,
       endDate: this.endDate
