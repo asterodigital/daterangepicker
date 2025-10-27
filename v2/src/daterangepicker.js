@@ -52,7 +52,7 @@ class DateRangePicker {
     this.drops = 'down';
     this.buttonClasses = 'btn btn-sm';
     this.applyButtonClasses = 'btn-primary';
-    this.cancelButtonClasses = 'btn-default';
+    this.cancelButtonClasses = 'btn-secondary';
     
     // Initialize locale
     this.locale = dom.extendDeep({}, DEFAULT_LOCALE);

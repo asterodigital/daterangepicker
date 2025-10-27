@@ -74,7 +74,7 @@ export const DEFAULT_OPTIONS = {
   drops: 'down',
   buttonClasses: 'btn btn-sm',
   applyButtonClasses: 'btn-primary',
-  cancelButtonClasses: 'btn-default',
+  cancelButtonClasses: 'btn-secondary',
   locale: DEFAULT_LOCALE,
   template: DEFAULT_TEMPLATE
 };
