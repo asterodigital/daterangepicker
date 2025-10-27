@@ -54,6 +54,12 @@ export class Calendar {
     const lastDayOfWeek = lastDay.day();
     let diffEnd = 6 - ((lastDayOfWeek - firstDayOfWeek + 7) % 7);
     lastDay = lastDay.add(diffEnd, 'day');
+
+    // Ensure six visible weeks so both calendars keep equal height
+    const visibleDays = lastDay.diff(firstDay, 'day') + 1;
+    if (visibleDays < 42) {
+      lastDay = firstDay.clone().add(41, 'day');
+    }
     
     let currentDate = firstDay.clone();
     
